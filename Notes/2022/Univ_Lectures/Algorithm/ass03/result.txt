@@ -1,0 +1,120 @@
+Function used : selection
+Time spent : 0.106967s
+Dataset : random.txt
+  1000th data :    214663135
+  2000th data :    438180988
+  3000th data :    648511047
+  4000th data :    865551324
+  5000th data :   1070165743
+  6000th data :   1281071863
+  7000th data :   1497690167
+  8000th data :   1711000627
+  9000th data :   1934072747
+ 10000th data :   2147413436
+
+Function used : selection
+Time spent : 0.111246s
+Dataset : reverse.txt
+
+Function used : selection
+Time spent : 0.104897s
+Dataset : somerandom.txt
+
+Function used : selection
+Time spent : 0.105206s
+Dataset : first_one_tenth.txt
+
+Function used : selection
+Time spent : 0.104547s
+Dataset : last_one_tenth.txt
+
+Function used : bubble
+Time spent : 0.257148s
+Dataset : random.txt
+  1000th data :    214663135
+  2000th data :    438180988
+  3000th data :    648511047
+  4000th data :    865551324
+  5000th data :   1070165743
+  6000th data :   1281071863
+  7000th data :   1497690167
+  8000th data :   1711000627
+  9000th data :   1934072747
+ 10000th data :   2147413436
+
+Function used : bubble
+Time spent : 0.243052s
+Dataset : reverse.txt
+
+Function used : bubble
+Time spent : 0.004374s
+Dataset : somerandom.txt
+
+Function used : bubble
+Time spent : 0.045831s
+Dataset : first_one_tenth.txt
+
+Function used : bubble
+Time spent : 0.022847s
+Dataset : last_one_tenth.txt
+
+Function used : bubble_noflag
+Time spent : 0.254710s
+Dataset : random.txt
+  1000th data :    214663135
+  2000th data :    438180988
+  3000th data :    648511047
+  4000th data :    865551324
+  5000th data :   1070165743
+  6000th data :   1281071863
+  7000th data :   1497690167
+  8000th data :   1711000627
+  9000th data :   1934072747
+ 10000th data :   2147413436
+
+Function used : bubble_noflag
+Time spent : 0.243491s
+Dataset : reverse.txt
+
+Function used : bubble_noflag
+Time spent : 0.119512s
+Dataset : somerandom.txt
+
+Function used : bubble_noflag
+Time spent : 0.141714s
+Dataset : first_one_tenth.txt
+
+Function used : bubble_noflag
+Time spent : 0.118870s
+Dataset : last_one_tenth.txt
+
+Function used : insert
+Time spent : 0.076043s
+Dataset : random.txt
+  1000th data :    214663135
+  2000th data :    438180988
+  3000th data :    648511047
+  4000th data :    865551324
+  5000th data :   1070165743
+  6000th data :   1281071863
+  7000th data :   1497690167
+  8000th data :   1711000627
+  9000th data :   1934072747
+ 10000th data :   2147413436
+
+Function used : insert
+Time spent : 0.152122s
+Dataset : reverse.txt
+
+Function used : insert
+Time spent : 0.001971s
+Dataset : somerandom.txt
+
+Function used : insert
+Time spent : 0.028322s
+Dataset : first_one_tenth.txt
+
+Function used : insert
+Time spent : 0.000829s
+Dataset : last_one_tenth.txt
+

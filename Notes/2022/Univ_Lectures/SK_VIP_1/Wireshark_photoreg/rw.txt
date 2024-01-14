@@ -1,0 +1,2 @@
+curl --request POST "http://localhost:8086/api/v2/write?org=pin&bucket=test&precision=ns" --header "Authorization: Token " --header "Content-Type: text/plain; charset=utf-8" --header "Accept: application/json" --data-binary 'm3,t3=tttt temp=80'
+

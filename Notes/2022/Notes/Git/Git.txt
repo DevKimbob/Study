@@ -1,0 +1,94 @@
+# workflow example
+$ git init
+$ git remote add origin <URL>
+# add, edit, rm files
+# $ git status
+$ git add .
+# $ git status
+$ git commit
+# $ git status
+$ git push origin master
+
+# reference : https://backlog.com/git-tutorial/kr/
+
+# LVL : BASIC
+# BASICS
+Git repository : 파일이나 폴더를 저장해 두는 곳
+
+Remote Repository : 서버에서 관리
+Local Repository : 사용자 pc에서 관리
+
+Push : local -> remote
+Pull : remote -> local
+
+Commit : 변경을 기록, 40자리의 고유 이름이 붙음
+git에서 권장하는 메시지 형식 :
+1st line : 커밋 내의 변경 내용 요약
+2nd line : 빈 칸
+3rd line : 변경한 이유
+
+Commit 과정 : 파일에서 내가 원하는 만큼만 commit 가능
+Work Tree -> Index(staging) (push : -> Repository)
+
+# COMMAND LINES
+# saved to ~/.gitconfig
+$ git config --global user.name <user_name>
+$ git config --global user.email <email_address>
+
+# git initialise : makes .git folder
+$ git init
+
+# check status of work tree, index
+$ git status
+
+# add files to index
+# paramter = . to add all files
+$ git add <file>
+
+# commit with message
+$ git commit -m <comment>
+
+# see repository's log
+# --graph : show graph
+# --oneline : commit message as one line
+$ git log
+
+# add remote repository
+# 콘솔에서 push/pull은 원격 저장소명 생략시 origin의 이름의 원격 저장소 사용
+# 이에 원격 저장소명을 origin으로 하는 것이 일반적임
+$ git remote add <name> <URL>
+
+# git clone vs pull
+# clone : init, pull : work
+$ git clone <repository> <directory>
+
+# is same with
+$ git init
+$ git remote add origin <URL>
+$ git pull origin master
+
+# refspec : branch to push to
+# option -u : 브랜치명 생략. 비어있는 원격 저장소 최초 push때는 생략불가
+$ git push <repository> <refspec>
+
+# compare with clone
+$ git pull <repository> <refspec>
+
+# merging : edit -> push
+#
+# <<<<<<< Head
+# <original>
+# =========
+# <changed>
+# >>>>>>> commit name(?)
+
+# LVL : ADVANCED
+# BASICS
+Branch : 독립적으로 작업을 진행하기 위한 개념
+Master branch : 메인 브랜치
+Integration branch : 통합 브랜치, 배포 가능 상태의 브랜치
+Topic branch : 기능 추가, 버그 수정과 같은 단위 작업용 브랜치, feature branch
+
+
+
+# COMMAND LINES

@@ -1,0 +1,225 @@
+4. 변수와 자료형
+#include <stdio.h>
+전처리기, 헤더파일
+
+int main()
+main 함수
+
+printf, scanf
+기본 입출력
+
+// one line
+/* multiple
+lines */
+주석처리
+
+%d, %f, %lf, %c, %s, %3.5lf, %e(지수출력) 등
+포매팅
+
+\n, \', \" 등
+제어문자
+
+int : 32bit
+float : 32bit
+double : 64bit
+
+#define NUM 10
+cont int NUM 10;
+기호상수 정의방법의 차이
+
+ASCII code
+A = 65
+a = 97 (65 + 32)
+
+
+
+
+
+5. 수식과 연산자
++, -, *, /, %
+산술연산자
+
+>, <, ==, !=, >=, <=
+관계연산자
+
+&&, ||, !
+논리연산자
+
+=, +=, -= ...
+대입연산자, 복합대입연산자
+
+condition ? if_true : if_false
+조건연산자
+
+콤마연산자, 비트연산자 등
+
+int + double
+(int)double
+자동적형변환(올림변환) vs 명시적형변환
+
+
+
+
+
+6. 조건문
+제어구조 : 순차, 선택, 반복
+
+if문 : 중첩if문 가능
+if (condition) {
+    true
+}
+else if (condition) {
+    else if
+}
+else {
+    else
+}
+
+switch-case문 : 상황에 따라서 break없이도 가능. c1/c2는 정수
+switch (comp) {
+    case c1:
+        //pass
+        break;
+    case c2:
+        //pass
+        break;
+    default:
+        //pass
+        break;
+}
+
+goto문 : assembly branch와 같은 역할. 반복문을 사용하는 것이 더 나음
+goto label;
+label:
+-vs-
+label:
+goto label;
+
+
+
+
+
+7. 반복문
+while문
+while (condition) {
+    true
+}
+
+do-while문 : do를 최소 한번은 실행하는점 주의. while 뒤에 세미콜론 주의
+do {
+    pass
+} while (condition);
+
+for문 : 세 부분중에 빈 공간을 넣을 수도, 초기화부분에 출력문 등을 넣을 수도 있음
+for (initialization; expression; increment) {
+    pass
+}
+
+while문과 for문의 비교
+initialization
+while (expression) {
+    code
+    increment
+}
+-vs-
+for (initialization; expression; increment) {
+    code
+}
+
+sentinel(센티넬, 보초값) : 데이터의 끝을 알리는 데이터. ex) 1 4 5 -1에서 -1로 끝
+
+세미콜론으로 NULL문장 표시 가능?
+for (int i = 0; i < 10; i++) {
+    ;
+}
+
+break : 반복문 탈출
+continue : 다음 반복문으로 바로 넘어감
+nested loop : 중첩반복문
+
+
+
+
+
+8. 함수
+library function : 컴파일러 지원
+user-defined function : 사용자 정의
+
+함수 정의
+return_type function_name (parameters) {
+    code
+    return return_value
+}
+
+argument : 인수, 호출 프로그램에 의하여 함수에 실제로 전달되는 값
+parameter : 매개 변수, 인수를 전달받는 변수
+int add(int a, int b) { return a + b; }  // int a, int b : parameters
+sum = add(10, 20);  // 10, 20 : arguments
+
+함수 원형 사용안함 vs 사용함 : 함수가 다른 함수를 호출하는 경우등에 함수의 원형을 사용
+int add(int a, int b) { return a + b; }
+int main() {
+    int sum = add(1, 2);
+}
+-vs-
+int add(int, int);
+int main() {
+    int sum = add(1, 2);
+}
+int add(int a, int b) { return a + b; }
+
+헤더파일 : 함수의 원형을 정리해놓은 파일
+
+랜덤
+#include <stdlib.h>
+#include <time.h>
+
+srand((unsigned)time(NULL));  // seed random
+rand()%MAX;  // 의사 난수
+
+
+
+
+9. 함수와 변수
+변수가 가진 기본속성 중 몇가지
+scope : 범위, 사용가능한 범위
+lifetime : 생존 시간, 메모리상에 얼마나 오랫동안 존재하는지
+linkage : 연결, 서로 다른 영역에 있는 변수들을 연결하는데 사용
+
+지역변수, 전역변수
+local variable : 지역 변수, 함수 또는 블록 안에서 정의. 해당 함수/블록에서만 사용가능.
+메모리 스택에 자리함. 초기화 필요. 매개변수도 일종의 지역변수
+global variable : 전역 변수, 함수의 외부에서 선언. 소스파일의 어느곳에서도 사용가능
+메모리 데이터 영역에 자리함. 초기화하지 않을 시 컴파일러가 0으로 초기화. 사용 비추
+
+같은명의 변수 : 스코프 내부가 우선권
+
+변수의 범위 vs 생존시간
+변수를 사용할 수 있는 번위 vs 변수 자체의 생존 시간
+
+생존시간 : 정적할당, 자동할당
+static allocation : 프로그램이 실행되는 동안 계속해서 변수에 저장공간이 할당
+automatic allocation : 블록이 시작되면서 할당, 블록이 종료되면 회수
+
+기본적으로 전역변수(정적할당), 지역변수(자동할당)이지만 지역변수 앞에
+저장유형지정자를 붙여서 정적할당으로 변경할 수 있다.
+
+저장유행지정자 : 변수나 함수를 선언할 때 저장되는 위치를 지정한다. 생략시 선언 위치에 따라서 자동결정
+auto : 함수/블록 내에 선언되는 변수는 생략 가능. 함수/블록 종료시 메모리에서 제거
+static : 지역/전역변수에 모두 가능. 
+    static 지역변수 : 초기화 안할시 0으로 자동초기화. 딱 한번만 초기화. 스코프를 나가도 제거되지않음
+    static 전역변수 : 연결에서 다룸
+    static 함수 : 연결 다음에서 다룸
+register : 지역변수만 가능. 변수를 메모리가 아닌 레지스터에 저장.
+volatile : 변수와 관련된 문장을 최적화하지 않음. 하드웨어가 수시로 변수의 값을 변경함. 
+    문장을 실행할 때마다 메모리에서 읽음. 레지스터에 저장하지 않음.
+
+연결 : 무연결, 외부연결, 내부연결
+외부연결 : extern. 여려개의 소스파일이 공유. 보통 하나의 파일에서 전역변수선언 후 다른 파일에서 
+    extern으로 참조. 해당경우 변수사용은 모든 파일에서 가능하지만 초기화는 정의된 파일에서만 가능. 전역변수는 기본적으로 외부연결
+내부연결 : static 전역변수. 하나의 소스파일에서만 사용 가능. static이 붙지 않으면 다른 소스파일에서도 사용가능
+
+static 함수 : 변수 연결과 비슷하게 사용. static이 붙은 경우 정적함수로 해당 소스파일에서만 사용가능
+static이 없으면 다른 소스파일에서 extern으로 선언하여 사용가능
+
+가변매개변수함수, 순환호출(재귀함수)

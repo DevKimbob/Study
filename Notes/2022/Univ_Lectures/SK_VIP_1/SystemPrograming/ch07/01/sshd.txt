@@ -1,0 +1,9 @@
+root         837       1  0 Aug18 ?        00:00:04 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
+root      125846     837  0 04:44 ?        00:00:00 sshd: ubuntu [priv]
+ubuntu    125936  125846  0 04:44 ?        00:00:00 sshd: ubuntu@notty
+root      128047     837  0 07:25 ?        00:00:00 sshd: ubuntu [priv]
+ubuntu    128125  128047  0 07:25 ?        00:00:00 sshd: ubuntu@notty
+root      128966     837  0 07:25 ?        00:00:00 sshd: ubuntu [priv]
+ubuntu    129022  128966  0 07:25 ?        00:00:00 sshd: ubuntu@notty
+ubuntu    130181  130180  0 07:33 ?        00:00:00 sh -c ps -ef | grep sshd > sshd.txt
+ubuntu    130183  130181  0 07:33 ?        00:00:00 grep sshd

@@ -1,0 +1,230 @@
+== START OF PSQL ==
+
+https://yeojin-dev.github.io/blog/postgresql-ubuntu/
+https://www.youtube.com/watch?v=qw--VYLpxG4&ab_channel=freeCodeCamp.org
+
+* list of database
+\l
+
+* create database
+CREATE DATABASE <dbname>;
+
+* connect to psql
+psql -h <hostname> -U <role> <dbname> -p <port>
+
+* connect to database
+\c <dbname>
+
+* remove database
+DROP DATABASE <dbname>;
+
+== CREATING TABLES ==
+
+* create table
+CREATE TABLE <table_name> (
+    Column name + data type + constraints
+);
+
+* list of table
+\d
+\d <table_name>
+\dt
+
+* specify constraints
+CREATE TABLE person (
+    id BIGSERIAL NOT NULL PRIMARY KEY,  // BIGSERIAL : increase 1 automatically?
+    first_name VARCHAR(50) NOT NULL,
+    ...
+);
+
+* remove table
+DROP TABLE <table_name>;
+
+== INSERT RECORD TO TABLE ==
+
+* insert record
+INSERT INTO <table_name> ( Column name )
+VALUES ( Values );
+
+* get record
+SELECT <Colume name> FROM <table_name>;  // can select multiple table_names
+
+* does not duplicate
+SELECT DISTINCT <Colume name> ...
+
+== MACROS ==
+
+mockaroo.com
+download data
+\i <filepath>
+
+== OERDER BY ==
+
+* order : ascending
+SELECT <Colume name> FROM <table_name> ORDER BY <Colume name>;
+SELECT <Colume name> FROM <table_name> ORDER BY <Colume name> ASC;
+* order : descending
+SELECT <Colume name> FROM <table_name> ORDER BY <Colume name> DESC;
+
+== WHERE CLAUSE and AND ==
+
+* where : condition
+* AND, OR : compare
+* uses = not ==
+SELECT <> FROM <> WHERE <condition>;
+SELECT <> FROM <> WHERE <condition> AND <condition2>;
+SELECT <> FROM <> WHERE <condition> AND (<condition2> OR <condition3>);
+
+== COMPARISON OPERATORS ==
+
+* simple comp
+SELECT 1 = 1;  // output : t
+SELECT 1 <> 2;  // output : t, <> : not equal
+
+== SELECTION LIMIT ==
+
+* limit
+SELECT * FROM person LIMIT 5;  // not official from sql
+SELECT * FROM person FETCH FIRST 5 ROW ONLY;  // official from sql
+
+* offset
+SELECT * FROM person OFFSET 5 LIMIT 5;  // not official from sql
+SELECT * FROM person OFFSET 5 FETCH FIRST 5 ROW ONLY;  // official from sql
+
+* in
+SELECT * FROM person WHERE <col>=<val> OR <col>=<val> OR <col>=<val>;  // is same to
+SELECT * FROM person WHERE <col> IN (<val>, <val>, <val>);
+
+* between
+SELECT * FROM person WHERE <col> BETWEEN <val> AND <val>;
+
+* keyword wildcards
+SELECT * FROM person WHERE <col> LIKE <pattern>;  // pattern ex : '%.com' -> ending with .com
+// pattern ex : '_____@gmail.com' -> '5chars'@gmail.com
+SELECT * FROM person WHERE <col> ILIKE <pattern>;  // ILIKE : no upper/lower case
+
+== GROUP BY ==
+
+* group, print count
+SELECT <col>, COUNT(*) FROM <tab> GROUP BY <col>;
+
+* having
+SELECT <col>, COUNT(*) FROM <tab> GROUP BY <col> HAVING COUNT(*) > 5;
+
+== AGGREGATE FUNCTIONS == 
+
+* min, max, ave
+SELECT MIN(<col>) FROM <tab>;
+SELECT MAX(<col>) FROM <tab>;
+SELECT AVE(<col>) FROM <tab>;
+
+* round result
+SELECT ROUND(AVE(<col>)) FROM <tab>;
+
+* sum
+SELECT SUM(<col>) FROM <tab>;
+
+== ARITHMETIC OPERATIONS ==
+
+* simple calcualtion
+SELECT 10 + 2;  // output : 12
+SELECT 10 ^ 2;  // output : 100
+
+* an example
+SELECT id, price, ROUND(price * .9, 1) FROM car;  // 10% discount
+
+== AILIAS ==
+
+* Colume name
+Function name or ??
+
+* ailias
+SELECT price AS price_orig, ROUND(price * .9, 1) AS price_dis FROM car;
+
+== KEYWORDS ==
+
+* coalesce : handle null
+SELECT COALESCE(1);  // output : 1
+SELECT COALESCE(null, 2);  // output : 2
+SELECT COALESCE(null, null, 3);  // output : 3
+SELECT COALESCE(null, 4, 5);  // output : 4
+
+* nullif(a, b) : if a == b return null, else return a
+* can be used for division by zero
+* num / null = null
+SELECT 10 / NULLIF(0, 0);  // output : null
+SELECT COALESCE(10 / NULLIF(0, 0), 0);  // output : 0
+
+== TIME, DATE ==
+
+* timestamp
+SELECT NOW();
+SELECT NOW()::DATE;
+SELECT NOW()::TIME;
+SELECT NOW() - INTERVAL '10 YEARS';
+SELECT NOW() + INTERVAL '10 MONTH';
+SELECT EXTRACT(YEAR FROM NOW());
+... AGE(NOW(), date_of_birth) ...
+
+== CONSTRAINTS ==
+
+PRIMARY KEY : value in a column which uniquely identifies a record in any table
+
+* drop constraint
+ALTER TABLE person DROP CONSTRAINT person_pkey;
+
+* add primary key
+ALTER TABLE person ADD PRIMARY KEY (id);
+
+* remove record
+DELETE FROM person WHERE id = 1;
+
+* add unique constraint
+ALTER TABLE person ADD CONSTRAINT unique_email_address UNIQUE (email);
+ALTER TABLE person ADD UNIQUE (email);
+
+* constraint check
+ALTER TABLE person ADD CONSTRAINT gender_constraint CHECK (gender = 'Male' OR gender = 'Female');
+
+== UPDATE RECORD ==
+
+* update
+UPDATE person SET email = 'ommar@gmail.com' WHERE id = 10;
+
+* conflict : use on constraint columns
+INSERT INTO ... VALUES ... ON CONFLICT (email) DO NOTHING;  // ignore
+... ON CONFLICT (email) DO UPDATE SET email = EXCLUDED.email;  // overide
+
+* reference
+create table car (
+    ...
+    car_id BIGINT REFERENCES car (id),
+    UNIQUE(car_id)
+)
+UPDATE person SET car_id = 1 WHERE id = 2;
+
+== JOIN ==
+
+* inner joins : c = a x b
+SELECT * FROM person
+JOIN car ON person.car_id = car.id;
+
+* left joint : c = a + a x b -ish
+SELECT * FROM person
+LEFT JOIN car ON person.car_id = car.id;
+
+== CSV FILE ==
+
+\copy (SELECT ...) TO <pathname> DELIMITER ',' CSV HEADER
+
+== SEQUENCE ==
+
+* nextval(...) : sequence
+\d person
+id | bigint | | not null | nextval('person_id_seq'::regclass)
+
+* envoke sequence
+SELECT nextval(...);
+
+* restart sequence
+ALTER SEQUENCE person_id_seq RESTART WITH 10;

@@ -1,0 +1,54 @@
+{
+    "node_count" : 10,
+    "path_count" : 14,
+    "node" : {
+        "Seoul" : {
+            "Cheonan" : 12,
+            "Wonju" : 15
+        },
+        "Cheonan" : {
+            "Seoul" : 12,
+            "Daejeon" : 10,
+            "Nonsan" : 4
+        },
+        "Nonsan" : {
+            "Cheonan" : 4,
+            "Daejeon" : 3,
+            "Gwangju" : 13
+        },
+        "Gwangju" : {
+            "Nonsan" : 13,
+            "Busan" : 15
+        },
+        "Wonju" : {
+            "Seoul" : 15,
+            "Gangneung" : 21,
+            "Daegu" : 7
+        },
+        "Daejeon" : {
+            "Cheonan" : 10,
+            "Nonsan" : 3,
+            "Daegu" : 10
+        },
+        "Daegu" : {
+            "Wonju" : 7,
+            "Daejeon" : 10,
+            "Busan" : 9,
+            "Pohang" : 19
+        },
+        "Busan" : {
+            "Gwangju" : 15,
+            "Daegu" : 9,
+            "Pohang" : 5
+        },
+        "Gangneung" : {
+            "Wonju" : 21,
+            "Pohang" : 25
+        },
+        "Pohang" : {
+            "Gangneung" : 25,
+            "Daegu" : 19,
+            "Busan" : 5
+        }
+    }
+}

@@ -1,0 +1,14 @@
+// 현재 디렉터리의 위치 검색하기 2
+
+#define _GNU_SOURCE
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+int main() {
+    char *cwd;
+
+    cwd = get_current_dir_name();
+    printf("cwd = %s\n", cwd);
+    free(cwd);
+}

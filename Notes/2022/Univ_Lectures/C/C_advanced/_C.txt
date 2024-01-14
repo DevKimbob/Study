@@ -1,0 +1,306 @@
+10. 배열
+배열의 선언 : 주로 기호상수를 사용, 배열 이름은 배열의 주소를 가리킴
+array_type array_name[count];
+
+인덱싱
+0부터 시작. 배열크기를 초과하는 범위도 인덱싱은 가능하지만 쓰레기값 반환.
+
+배열의 초기화
+int arr[3];  // {cc, cc, cc} 쓰레기값
+int arr[3] = {1, 2, 3};  // {1, 2, 3} 적은대로
+int arr[3] = {1};  // {1, 0, 0} 나머지는 0
+int arr[3] = {0};  // {0, 0, 0} 위와 동일 나머지는 0
+
+배열 요소 개수 계산
+int size = sizeof(arr) / sizeof(arr[0]);  // 배열총크기 / 배열원소1개크기
+
+배열 복사, 비교 : 깊은복사를 사용
+
+배열과 함수 : 배열의 원형 전달
+int func(int arr[], int size);
+
+배열 변형 금지 : const로 전달
+
+2차원 배열 선언
+int arr[row][col];
+
+2차원 배열 초기화  // 1차원배열과 같이 주어진 개수가 적으면 나머지는 0으로 초기화.
+    메모리상에는 1차원배열로 배치되기 때문에 1차원 배열로 계산해도 오류는 안남.
+int arr[2][3] = {  // 모두 명시
+    {1, 2, 3},
+    {4, 5, 6}
+};
+int arr[][3] = {  // 열의 개수는 반드시 지정. 행은 컴파일러가 자동으로
+    {1, 2, 3},
+    {4, 5, 6}
+};
+int arr[][3] = {
+    1, 2, 3, 4, 5, 6
+};
+
+2차원 배열과 함수
+int func(int arr[row][col], int size);  // row는 생략가능
+
+배열의 정렬은 자료구조에서 구현
+
+
+
+
+11. 포인터
+포인터 : 메모리의 주소를 가진 변수
+
+& : 주소연산자
+int i = 0; printf("%x", &i);
+
+포인터 선언
+var_type * var_name;
+int* ptr = NULL;  // NULL로 초기화 하는 습관 들이기. #define NULL ((void *)0)
+int* p1, * p2, * p3;  // 여러 변수 선언
+
+포인터 초기화
+int* ptr = (int*)1000;  // 절대주소값 대입
+int* ptr = &i;  // 변수의 주소값 대입
+
+* : 간접 참조 연산자. 포인터 변수가 가리키는 곳의 값.
+
+v = *p++ : p가 가리키는 값을 v에 대입한 후에 p를 증가
+v = (*p)++ : p가 가리키는 값을 v에 대입한 후에 p가 가리키는 값을 증가
+v = *++p : p를 증가시킨 후에 p가 가리키는 값을 v에 대입
+v = ++*p : p가 가리키는 값을 증가하여 v에 대입
+
+포인터의 형변환
+pi = (int*)pd;
+
+호출
+void swap(int x, int y);  // call by value
+void swap(int *px, int *py);  // call by address
+
+함수에서 포인터를 반환할 때 스코프에 의하여 없어지는 값의 포인터를
+반환하는 것은 아닌지 주의
+
+포인터와 배열
+int arr[3];  // 이 있을 떄
+arr + 1
+*(arr + 1)  // 이 둘은 동일함
+
+함수와 배열과 포인터
+void print_arr(int* ptr, int size);  // 배열을 배열이 아닌 포인터로 받기. 차이는 없음
+
+
+
+
+12. 문자와 문자열
+문자열의 초기화 : 맨 마지막에 NULL문자 '\0'가 존재해야함
+char str[4] = {'a', 'b', 'c', '\0'};
+char str[4] = "abc";
+char str[4] = "abcdef";  // {'a', 'b', 'c', 'd'}로 NULL문자 추가 안됨. 컴파일 경고 발생
+char str[6] = "abc";  // {'a', 'b', 'c', '\0', '\0', '\0'}
+char str[4] = "";  // {'\0', '\0', '\0', '\0'}
+char str[] = "abc";  // {'a', 'b', 'c', '\0'}로 크기 자동 부여
+
+문자열과 포인터
+char* p = "HelloWorld";  // 포인터 변수가 data segment에 저장, 문자열이 text segment에 저장.
+    문자열을 변경할 순 없지만, text segment에 새 문자열을 만들어 가리키도록 할 순 있음.
+    ex) p = "Goodbye";
+
+문자 입출력 라이브러리
+    // stdio.h
+    int scanf("%c", &c)  // 하나의 문자를 읽어서 c에 저장
+    int printf("%c", c)  // c에 저장된 문자 출력
+
+    int getchar(void)  // 하나의 문자를 읽어서 반환. EOF(-1)체크를 위해 int형으로 반환
+    void putchar(int c)  // c에 저장된 문자 출력
+
+    // conio.h : c언어 표준이 아니기에 vs에서만 사용가능?
+    int _getch(void)  // 하나의 문자를 읽어서 반환. 버퍼 사용하지 않음
+    int _getche(void)  // _getch + echo
+    void _putch(int c)  // c에 저장된 문자 출력. 버퍼 사용하지 않음
+
+문자열 입출력 라이브러리
+    // stdio.h
+    int scanf("%s", s)  // &s가 의미가 없음(문자열 = 배열)
+    int printf("%s", s)
+
+    char* gets_s(char* s, int size)  // 구현하지 않은 컴파일러도 존재
+    int puts(const char* s)
+
+문자 처리 라이브러리
+    // ctype.h
+    isalpha(c)
+    ...
+    toupper(c)
+    ...
+
+문자열 처리 라이브러리
+    // string.h
+    strlen(s)  // length
+
+    strcpy(s1, s2)  // s2 copy to s1
+    strcat(s1, s2)  // s2 append to s1
+    strcmp(s1, s2)  // compare s1, s2
+    
+    strncpy(s1, s2, n)  // max n
+    strncat(s1, s2, n)
+    strncmp(s1, s2, n)
+    
+    strchr(s, c)  // search c in s
+    strstr(s1, s2)  // search s2 in s1
+    
+    char* strtok(s, delimit)  // s to token by delimit(분리자)
+        첫번째 토큰에 대한 포인터 반환. 정확한 작동원리 나중에 다시 체크
+
+문자열 수치 변환
+    sscanf(s, "%d", value)  // s를 정수형으로 value에 저장하는 예시
+    sprintf(s, "%d", value)  // 정수형의 value를 s에 저장하는 예시
+
+    int atoi(const char* str)  // string to int
+    double atof(const char* str)  // string to double
+
+
+
+
+13. 구초제
+구조체의 선언
+struct(keyword) tag {
+    struct_member
+};
+
+구조체 변수 선언 및 초기화
+struct student s1 = {24, "Kim", 4.3};  // keyword = student, {age, name, grade}
+
+구조체 멤버 참조
+s1.grade = 3.5;
+
+이름없는 구조체 선언
+struct {
+    int number;
+    char name[10];
+    double grade;
+} s1, s2, s3;
+
+구조체 속 구조체
+struct circle {
+    int radius;
+    struct point p;
+};
+struct circle c1;
+c1.p.x = 3;
+
+구조체 배열
+struct circle list[3];
+
+구조체 포인터
+struct circle c;
+struct circle* p;
+p = &c;
+
+간접 멤버 연산자 : 둘이 같은 표현
+(*p).member
+p->member
+
+함수와 구조체
+Call by Value : 구조체 복사. 멤버 연산자 사용
+Call by Address : 구조체 주소 전달. 간접 멤버 연산자 사용
+Return structure : 구조체 복사 반환
+
+공용체 : 한 공간을 여러개의 자료형으로 해석가능. 가장 큰 메모리용량을 요구하는 만큼의 용량을 가짐
+union example {
+    char c;
+    int i;
+};  // example : 4byte(int)
+union example v;
+v.c = 'A';
+v.i = 1000;  // v 공간을 overwrite
+
+열거형 : 인덱스는 기본적으로 0부터 시작. switch-case문에서 응용가능
+enum days {SUN, MON, TUE, WED, THU, FRI, SAT};  // 정의
+enum days today;
+today = SUN;
+enum days {SUN=7, MON=1, TUE, WED, THU, FRI, SAT}  // 인덱스 임의지정 : TUE부터는 2부터 
+
+자료형 정의
+// typedef origin_datatype new_datatype;
+typedef int INT32;  // 정수
+typedef struct point POINT;  // 구조체
+typedef struct point {
+    ...
+} POINT;  // 구조체 다른 방법
+typedef enum {...} BOOL;  // 열거형
+typedef char* SPTR;  // 포인터
+
+
+
+
+14. 포인터 활용
+이중 포인터 : 또 다른 포인터의 주소를 값으로 가지는 포인터
+
+이중 포인터 선언
+int i = 100;
+int* p = &i;
+int** q = &p;
+
+이중 포인터는 포인터를 함수 안에서 변경하려고 할 떄 매개변수를 이중 포인터로 정의하여 구현한다
+void text(char** q) {
+	*q = "changed text";
+}
+int main() {
+	char* p = "original text";
+	text(&p);
+}
+
+포인터 배열 vs 배열 포인터
+an array of pointers vs a pointer to an array
+int arr[5] = {1, 2, 3, 4, 5};
+int a = 1, b = 2, c = 3, d = 4, e = 5;
+
+int* ap[5] = {&a, &b, &c, &d, &e};  // array of pointers, 말그대로
+
+int (*pa)[5];  // pa는 arr의 주소값을 값으로 가지게 됨. *pa = arr, **pa = 1
+pa = &arr;
+
+함수 포인터 : 함수를 가리키는 포인터
+int add(int, int);
+
+int (*pf)(int, int);  // 함수 포인터 선언
+pf = add;
+
+int (*pfa[4])(int, int) = {add, sub, mul, div};  // 함수 포인터의 배열 선언
+
+result = (*pf)(10, 20);
+result = pfa(10, 20);  // 대부분의 컴파일러에서 pr(10, 20);과 같이 쓰는 것을 허용하기도 함
+
+다차원 배열
+int Row = 2, Col = 3;
+int m[Row][Col];  // (m[Row])[Col]
+
+	   -> Col
+|	  m[0][0] m[0][1] m[0][2]
+v Row m[1][0] m[1][1] m[1][2]
+
+다차원 배열은 메모리 상에서는 사실상 긴 1차원 배열임을 기억하자
+
+메인함수의 인수 : exe파일에 대한 인수? (ex: $ main arg1 arg2 => argv[0] = main.exe's location, argv[1] = arg1, argv[2] = arg2)
+// argc : 인수의 개수, argv : 인수들의 문자열
+int main(int argc, char* argv[]) {}
+
+
+
+
+15. 스트림과 파일 입출력
+16. 전처리 및 다중 소스 파일
+
+
+
+
+17. 동적 메모리
+동적 메모리 할당,사용 및 반납
+int* p;  // = NULL;
+p = (int*)malloc(100*sizeof(int));  // (자료형)"memory allocation"(개수*크기)
+*(p + 99) = 100;  // 사용 예시
+free(p);  // 공간 반납
+
+(int*)malloc(n*sizeof(int));
+(int*)calloc(n, sizeof(int));  // 0으로 초기화된 메모리 할당
+realloc(p, n*sizeof(int));  // p의 크기 변경
+
+연결 리스트 : 자료구조론에서 계속

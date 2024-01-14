@@ -1,0 +1,86 @@
+1. C++ 시작
+객체지향 : 캡슐화, 상속성, 다형성
+
+
+
+
+2. C++ 프로그래밍의 기본
+주석
+	/* */ 와 // 를 사용
+
+main함수
+	C++ 표준에서는 리턴타입이 int
+
+#include <iostream>
+	C++ 표준 입출력 라이브러리
+	ios -> ostream -> istream -> iostream
+
+#include "user.h"
+	사용자가 만든 헤더파일
+
+
+-출력-
+std::cout << "Hello World!";
+	<< : 스트림 삽입 연산자
+
+std::cout << "l1" << "l2";
+	여러줄 출력
+
+std::cout << "next line\n";
+std::cout << "next line" << '\n';
+std::cout << "next line" << std:endl;
+	개행 방법, stream buffer의 차이가 존재
+
+namespace
+	std(C++ 표준 이름 공간):: 등
+
+using std::cout;
+cout << "hello" << std::endl;
+	cout에 대해서 std:: 생략
+
+using namespace std;
+cout << "hello" << endl;
+	std에 선언된 모든 이름에 std:: 생략
+
+
+-입력-
+int width;
+cin >> width;
+	enter시 입력버퍼의 값을 width에 대입
+
+문자열입력
+	C-string : 널 문자로 끝나는 char 배열
+		char name1[4] = {'D', 'a', 'n', '\0'};  // 문자열 "Dan"
+		char name2[3] = {'D', 'a', 'n'};  // 단순 문자 배열
+		cin.getline(array, 100, '\n');  // 띄어쓰기가 포함된 문자열
+
+	string class : #include <string>
+		string singer;
+		getline(cin, singer);
+
+
+
+
+3. 클래스와 개체
+캡슐화
+	객체의 구성 요소들에 대한 외부에서의 접근권한을 지정(하는 느낌)
+	C++에서 클래스는 캑체를 정의하는 틀
+	C++객체는 멤버 변수와 멤버 함수로 구성, 인스턴스로도 불림
+
+클래스의 정의
+class Circle {  // 클래스 선언부
+public:  // 접근지정자
+	Circle();  // 생성자
+	Circle(int r);  // 생성자 중복정의
+	int radius;
+	double getArea();
+	~Circle();
+};  // 세미콜론
+
+Circle::Circle() {}
+Circle::Circle(int r) {}
+Circle::~Circle() {}
+
+double Circle::getArea() {  // 클래스 구현부
+	return 3.14*radius*radius;
+}
