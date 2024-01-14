@@ -2,19 +2,19 @@
 
 **Table of Contents**
 - [File Directories](#file-directories)
-  - [Notes](#notes)
-  - [Presentations](#presentations)
-  - [Problems](#problems)
+  - [1. Notes](#1-notes)
+  - [2. Presentations](#2-presentations)
+  - [3. Problems](#3-problems)
 
 
 # File Directories
-## Notes
+## 1. Notes
 Study notes by year
 
-## Presentations
+## 2. Presentations
 All the presentations I've done as .pptx file.
 > not all, and sometimes not even .pptx ...  
 > :)
 
-## Problems
+## 3. Problems
 Problems and how I solved them (ish)
