@@ -5,3 +5,4 @@ Micro Service Architecture <!-- omit in toc -->
 
 
 # 4. React
+npx create-react-app <project_name>
