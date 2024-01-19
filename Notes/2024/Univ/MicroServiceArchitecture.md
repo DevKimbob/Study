@@ -22,6 +22,13 @@ Micro Service Architecture <!-- omit in toc -->
   - [5.6. Network](#56-network)
   - [5.7. Google Docs](#57-google-docs)
   - [5.8. GraphQL](#58-graphql)
+  - [5.9. D3](#59-d3)
+- [6. Router](#6-router)
+  - [6.1. Installation](#61-installation)
+  - [6.2. Routing](#62-routing)
+  - [6.3. Server side render](#63-server-side-render)
+  - [6.4. Iframe](#64-iframe)
+  - [6.5. UUID](#65-uuid)
 
 
 # 4. React
@@ -143,3 +150,27 @@ network -> throttling -> slow 3g
 
 ## 5.8. GraphQL
 쓰는 이유중에 내가 FE에 적용할 데이터 구조를 그대로 BE에 요청하면 그 응답을 그대로 "쏟아버리기"만 하면 되는 이유도 있음
+
+## 5.9. D3
+svg path 벡터를 DOM에서 조작할 수 있게 도와주는 라이브러리...?
+
+# 6. Router
+## 6.1. Installation
+```bash
+npm install react-router-dom
+npm install node-sass
+```
+
+## 6.2. Routing
+server side rendering : route at server side  
+MSA : usually route at client side
+
+## 6.3. Server side render
+검색엔진에게 검색이 가능하게 하려면 서버사이드에서 렌더를 해줘야함...?  
+ex) next.js
+
+## 6.4. Iframe
+도메인이 같으면 부모가 자식 컨트롤 가능  
+요즘엔 잘 안씀..ㅎ
+
+## 6.5. UUID
