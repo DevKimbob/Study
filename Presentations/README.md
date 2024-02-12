@@ -30,6 +30,8 @@
 > Self hosted PinLab seminar for group study perposes
 * 2023
   * 001 : 23.08.23
+* 2024
+  * 002 : 24.02.14
 
 ### SKVIP
 > SKVIP1 : skuniv lecture driven by bksong(prof. from PINLAB)
