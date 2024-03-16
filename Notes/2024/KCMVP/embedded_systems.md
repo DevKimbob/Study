@@ -1,0 +1,1 @@
+https://downloads.raspberrypi.org/raspios_armhf/images/raspios_armhf-2020-05-28/
