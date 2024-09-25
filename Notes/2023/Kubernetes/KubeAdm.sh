@@ -2,14 +2,14 @@
 
 # check sudo
 if [ $EUID != 0 ]; then
-	echo '** This script needs sudo privileges **'
-	exit 1
+        echo '** This script needs sudo privileges **'
+        exit 1
 fi
 
 # check argc
 if [[ $# -ne 4 && $# -ne 5 ]]; then
-	echo '** Usage : $ ./KubeAdm.sh <container_runtime_version> <runc_version> <cni_plugin_version> <kubernetes_version>'
-	exit 2
+        echo '** Usage : $ ./KubeAdm.sh <container_runtime_version> <runc_version> <cni_plugin_version> <kubernetes_version>'
+        exit 2
 fi
 
 # version variable
@@ -69,8 +69,8 @@ sed -i 's/^\/swapfile/#\/swapfile/' /etc/fstab
 apt-get update
 apt-get install -y apt-transport-https ca-certificates curl
 mkdir /etc/apt/keyrings
-curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /etc/apt/keyrings/kubernetes-archive-keyring.gpg
-echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | tee /etc/apt/sources.list.d/kubernetes.list
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
 apt-get update
 apt-get install -y kubelet=$KUBEVERSION kubeadm=$KUBEVERSION kubectl=$KUBEVERSION
 apt-mark hold kubelet kubeadm kubectl
